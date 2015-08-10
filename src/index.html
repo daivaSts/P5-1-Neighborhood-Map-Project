@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+	<title>My website</title>
+	<style>
+	body { padding-top: 70px; }
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="index.html">Welcome!</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<form class="navbar-form navbar-left ui-filterable" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search" id="myFilter" data-type="search">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	<br>
+	<!--********************************-->
+<!-- <ul data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true">
+      <li><a href="#">Adele</a></li>
+      <li><a href="#">Agnes</a></li>
+      <li><a href="#">Albert</a></li>
+      <li><a href="#">Billy</a></li>
+      <li><a href="#">Bob</a></li>
+      <li><a href="#">Calvin</a></li>
+      <li><a href="#">Cameron</a></li>
+      <li><a href="#">Chloe</a></li>
+      <li><a href="#">Christina</a></li>
+      <li><a href="#">Diana</a></li>
+      <li><a href="#">Gabriel</a></li>
+      <li><a href="#">Glen</a></li>
+      <li><a href="#">Ralph</a></li>
+      <li><a href="#">Valarie</a></li>
+    </ul> -->
+
+	<!--***********Accordion content **************-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4">
+				<div class="panel-group" id="accordion">
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-8">
+				<div id="mapDiv">
+				</div>
+			</div>
+		</div>
+<div class="btn-group btn-group-justified">
+  <a href="#" class="btn btn-default">Left</a>
+  <a href="#" class="btn btn-default">Middle</a>
+  <a href="#" class="btn btn-default">Right</a>
+</div>
+	</div>
+
+	<script src="js/jquery-2.1.4.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+  <script src="js/model.js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/wiki.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/search.js"></script>
+
+
+	</body>
+</html>
+
