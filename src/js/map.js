@@ -1,155 +1,81 @@
-var googleMap = '<div id="map"></div>';
+var map;
 
-var map;    // declares a global map variable
 
 /*****************************
- *initializeMap() is called when page is loaded.
+ *initMap() is called when page is loaded.
  */
-function initializeMap() {
-  var mapOptions = {
+function initMap() {
+  var self = this;
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoomControl: true,
+    zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL,
+        position: google.maps.ControlPosition.RIGHT_CENTER
+    },
     disableDefaultUI: true,
-    zoom: 8,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  /**
-   * Create a new Google Map JavaScript Object and attaches it to <div id="map">
-   */
-  map = new google.maps.Map(document.querySelector('#map'), mapOptions);
+    zoom: 6,
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    center: {lat: 38.6, lng: -108.0}
+  });
 
-  /**
-   * Returns an array of every location string from the JSONs
-   */
-  function locationFinder() {
-    var locations = [];
-    var all = loca.resorts;
-    for (var i = 0; i < all.length; i++) {
-      var coor = [all[i].lat, all[i].lon];
+  list = getResortList();
 
-      locations.push(all[i].placeNickname)
-    };
-    //console.log(locations)
-    return locations;
-  }
 
-  /************************************************************
-   *createMapMarker(placeData) reads Google Places search results to create map pins.
-   *placeData is the object returned from search results containing information
-   *about a single location.
-   */
-  function createMapMarker(placeData) {
-    //console.log(placeData)
-    // The next lines save location data from the search result object to local variables
-    var lat = placeData.geometry.location.lat();  // latitude from the place service
-    var lon = placeData.geometry.location.lng();  // longitude from the place service
+  for (var i=0; i< list.length; i++) {
+    var contentString = "<div><p>Loading...</p></div>";
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 200,
+      content: contentString
+    });
 
-    var address = placeData.formatted_address;   // name of the place from the place service
-    var name = placeData.name;
-    var bounds = window.mapBounds;            // current boundaries of the map window
-    var infotext = {"Telluride Ski Resort": 'Telluride Ski Resort is a ski resort located in Mountain Village.',
-                    "Steamboat Resorts": "Steamboat Resort is a major ski area in northwestern Colorado",
-                    "Aspen Skiing Co": "Snowmass is a part of the Aspen/Snowmass ski resort complex located in Snowmass",
-                    "Aspen Mountain Ski Resort - Aspen Skiing Company": "bla bla bla",
-                    "Arapahoe Basin Ski Area": "jhdfs ;lkfsjnf;h ; biuugyg"
-
-    };
-    console.log("name: "+name)
-    //console.log("address: "+address)
-    // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
+      position: {lat: list[i].lat(), lng: list[i].lon()},
       map: map,
-      position: placeData.geometry.location,
-      animation: google.maps.Animation.DROP
+      visible: true,
+      title: list[i].placeName()
     });
 
-    function toggleBounce() {
-      if (marker.getAnimation() != null) {
-        marker.setAnimation(null);
-      } else {
-        marker.setAnimation(google.maps.Animation.DROP);
-      }
-    }
-    var infoWindow = new google.maps.InfoWindow({
-      content: infotext[name],
-      maxWidth: 200
-    });
+
+    addMarker(marker)
+
 
     /**
-     * Listener for a mouse click on the marker to show an info window
-     */
-    google.maps.event.addListener(marker, 'click', function() {
-      toggleBounce();
-      if(!marker.open){
-           loadData(name)
-          infoWindow.open(map,marker);
-          marker.open = true;
-      }else{
-          infoWindow.close();
-          marker.open = false;
-      }
-    });
+    * Event listener : when clicked on the marker, opens the info window.
+    */
 
-    /**
-     *bounds.extend() takes in a map location object, adds the pin to the map.
-     */
-    bounds.extend(new google.maps.LatLng(lat, lon));
-    // fit the map to the new marker
-    map.fitBounds(bounds);
-    // center the map
-    map.setCenter(bounds.getCenter());
-  }
+    var weatherInfo = getResortList()[i].weather();
 
-  /************************************************************
-  callback(results, status) makes sure the search returned results for a location.
-  If so, it creates a new map marker for that location.
-  */
-  function callback(results, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-      createMapMarker(results[0]);
-    }
-  }
+    google.maps.event.addListener(marker,'click', (function(marker, infowindow,list,i){
+      return function() {
+        if (weatherInfo != "<div><b>Sorry! Weather data failed to load</b></div>" && weatherInfo.length > 0) {
+          infowindow.setContent(weatherInfo);
+        } else {
+          loadWeatherData(list, i, infowindow);
+        }
 
-  /************************************************************
-  pinPoster(locations) takes in the array of locations created by locationFinder()
-  and fires off Google place searches for each location
-  */
-  function pinPoster(locations) {
-    /**
-     *creates a Google place search service object which does the work of actually searching for location data.
-     */
-    var service = new google.maps.places.PlacesService(map);
-
-    // Iterates through the array of locations, creates a search object for each location
-    for (var place in locations) {
-            //console.log(locations[place])
-            var request = {
-                query: locations[place]
+        infowindow.open(map, marker);
       };
-      // Actually searches the Google Maps API for location data and runs the callback
-      // function with the search results after each search.
-      service.textSearch(request, callback);
-    }
-  }
+    })(marker,infowindow,list,i));
 
-  /************************************************************
-   * Sets the boundaries of the map based on pin locations
-   */
-  window.mapBounds = new google.maps.LatLngBounds();
+    /**
+    * Custom control event listener for browsers "click" event: when clicked on the list item,
+    * opens the info window on matching marker
+    */
+    var elem = document.getElementsByClassName("panel-title")
+    google.maps.event.addDomListener(elem[i], 'click', (function(marker, infowindow, list,i){
+      return function() {
 
-  // locations is an array of location strings returned from locationFinder()
-  locations = locationFinder();
-
-  // pinPoster(locations) creates pins on the map for each location in the locations array
-  pinPoster(locations);
+        if (weatherInfo != "<div><b>Sorry! Weather data failed to load</b></div>" && weatherInfo.length > 0) {
+          infowindow.setContent(weatherInfo);
+        } else {
+          loadWeatherData(list, i, infowindow);
+        }
+        infowindow.open(map, marker);
+      };
+    })(marker, infowindow, list,i));
+  };
 }
 
-// Calls the initializeMap() function when the page loads
-window.addEventListener('load', initializeMap);
 
-// Vanilla JS way to listen for resizing of the window and adjust map bounds
-window.addEventListener('resize', function(e) {
-  // Make sure the map bounds get updated on page resize
-  map.fitBounds(mapBounds);
-  //map.setZoom(8);
-
-});
-$("#mapDiv").append(googleMap)
+// Calls the initMap() function when the page loads
+//window.addEventListener('load', initMap);
