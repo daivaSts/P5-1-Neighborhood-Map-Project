@@ -1,0 +1,22 @@
+#### Optimization Tips, Tricks and Resourses:
+
+
+* https://www.udacity.com/course/ud110
+* https://www.udacity.com/course/ud989
+* Knockout JS - http://knockoutjs.com/
+* Google Maps API Documentation - https://developers.google.com/maps/documentation/javascript/
+* Open Weather API Documentation - http://openweathermap.org/
+* Bootstrap CSS Implementation -http://getbootstrap.com/
+* Color Theme Implementation -http://bootswatch.com/
+* http://www.jslint.com/
+* https://validator.w3.org/#validate_by_input
+* jigsaw.w3.org/css-validator/#validate_by_input
+* westciv.com/tools/manifestR/
+* http://www.html5rocks.com/en/tutorials/appcache/beginner/
+* http://www.w3.org/TR/2011/WD-html5-20110525/offline.html
+* gruntjs.com/
+* ngrok.com/
+* http://usejsdoc.org/
+* Stackoverflow
+* Chrome Developer Tools
+

@@ -1,0 +1,17 @@
+CACHE MANIFEST
+
+#version 1.1 9-2-2015
+
+CACHE:
+
+#images
+
+css/bootstrap.min.css
+img/*.jpg
+img/*.png
+js/*.js
+
+
+
+NETWORK:
+*

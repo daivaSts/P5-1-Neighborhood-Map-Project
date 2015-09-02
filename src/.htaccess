@@ -1,0 +1,15 @@
+<IfModule mod_expires.c>
+
+# Enable expirations
+ExpiresActive On
+
+# Default directive
+ExpiresDefault	"access plus 1 month"
+
+# Images
+ExpiresByType	dist/img/gif	"access plus 1 month"
+ExpiresByType	dist/img/png	"access plus 1 month"
+ExpiresByType	dist/img/jpeg	"access plus 1 month"
+ExpiresByType	dist/img/jpeg	"access plus 1 month"
+
+</IfModule>
