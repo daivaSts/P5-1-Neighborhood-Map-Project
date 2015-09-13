@@ -12,6 +12,7 @@
 * https://validator.w3.org/#validate_by_input
 * jigsaw.w3.org/css-validator/#validate_by_input
 * westciv.com/tools/manifestR/
+* https://twitter.github.io/typeahead.js/
 * http://www.html5rocks.com/en/tutorials/appcache/beginner/
 * http://www.w3.org/TR/2011/WD-html5-20110525/offline.html
 * gruntjs.com/
@@ -19,4 +20,18 @@
 * http://usejsdoc.org/
 * Stackoverflow
 * Chrome Developer Tools
+
+DEVELOPMENT:
+* Developed project code following Model-View-View-Model (MVVM) patter, using KnockoutJS framework.
+* Developed code required to add a full-screen map to the page using the Google Maps API through Knockout custom bindings.
+* Developed code required to add map markers identifying locations of interest.
+* Implemented the search bar functionality to search and filter the map markers according to filter result.
+* Implementyed Twitter TypeaheadJS for fast auto completion.
+* Implemented a list view of the identified locations.
+* Map markers provide the latest weather data from Open Weather API when clicked.
+* List view entry has collapsible panel with more information received from Wikipedia when clicked.
+* Created Cache manifest myCache.appcache file to cash images and resources.
+* Created .htaccess  with the expiration dates.
+* Minified js, css added to html, minified html.
+* Added comments to code using JSDoc 3  markup language.
 

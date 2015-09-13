@@ -2,6 +2,13 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 	grunt.initConfig({
+		concat: {
+		    dist: {
+		     	src: ['dist/css/bootstrap.min.css', 'dist/css/jquery-ui.min.css', 'dist/css/style.min.css'],
+		      	dest: 'dist/css/built.css',
+		    },
+
+		  },
 		jshint: {
 			options: {
 				"eqeqeq": true
@@ -27,7 +34,7 @@ module.exports = function(grunt) {
 	    uglify: {
     		my_target: {
       			files: {
-        			'dist/js/knockout.mapping.min.js': ['src/js/knockout.mapping.js']
+        			'dist/js/knockout-3.3.0.min.js': ['src/js/knockout-3.3.0.js']
       			}
     		}
   		},
@@ -48,6 +55,7 @@ module.exports = function(grunt) {
 		"jshint",
 		"uglify",
 		'htmlmin',
-		'cssmin'
+		'cssmin',
+		'concat'
 		]);
 };

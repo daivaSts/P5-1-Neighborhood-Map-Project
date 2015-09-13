@@ -1,29 +1,51 @@
 body {
- padding-top: 70px;
+    padding-top: 70px;
 }
 
 #got-skis {
-    font-family: 'Arizonia', cursive;
+    font-family: "Arizonia", cursive;
     font-size: 36px;
     margin-right: 10px;
 }
 
-
 #map {
-  display: inline;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  z-index: -1;
-  border-top:50px solid #fff;
-  border-bottom:20px solid #fff;
-  background: transparent url(http://google-web-toolkit.googlecode.com/svn-history/r8457/trunk/user/src/com/google/gwt/cell/client/loading.gif) no-repeat 50% 50%;
+    display: inline;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    border-top:50px solid #fff;
+    border-bottom:20px solid #fff;
+    background: transparent url(http://google-web-toolkit.googlecode.com/svn-history/r8457/trunk/user/src/com/google/gwt/cell/client/loading.gif) no-repeat 50% 50%;
 }
 
 .red-text {
-  color: #b20000;
+    color: #b20000;
+    font-size: 16px;
 }
 
+.tt-menu {
+    width: 200px;
+    margin-top: 12px;
+    padding: 8px 0;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    line-height: 24px;
+}
+
+@media (max-width: 768px) {
+    #got-skis {
+        font-size: 20px;
+        margin-right: 5px;
+    }
+    .typeahead {
+        font-size: 10px;
+  }
+}
 
