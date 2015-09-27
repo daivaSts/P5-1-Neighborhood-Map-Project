@@ -30,4 +30,4 @@ var resortLocations = [
         lon: -106.773056,
         id:"5"
         }
-    ]
+    ];
