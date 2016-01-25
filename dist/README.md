@@ -15,7 +15,13 @@ TO USE:
 * Mobile interaction:
 	* Type in the search window any location name to filter locations, or select a location from a prepopulated drop-down list of locations.
 	* Click on the marker to get current weather information at the location.
+	
+DESKTOP VIEW:
+	![alt tag](https://github.com/daivaSts/P5-1-Neighborhood-Map-Project/blob/master/dist/img/Capture.PNG)
 
+MOBILE VIEW:
+	![alt tag](https://github.com/daivaSts/P5-1-Neighborhood-Map-Project/blob/master/dist/img/CaptureMobile.PNG)
+	
 #### Development, Optimization Tips, References and Resources:
 * Open Tips-tricks-resources.txt
 
